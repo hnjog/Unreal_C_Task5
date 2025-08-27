@@ -17,10 +17,13 @@ protected:
 
 	int32_t Step();
 
+	void Move();
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 
 public:
+	// Vector와 비슷한 동적 배열 컨테이너
 	TArray<FVector2D> Coords;
-
+	int32_t Idx;
 };
