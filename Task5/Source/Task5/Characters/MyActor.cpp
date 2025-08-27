@@ -17,28 +17,7 @@ void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (int i = 1; i < 11; i++)
-	{
-		FVector next = Coords[i - 1];
-		if (Task5::Utils::IsSuccess50Percent())
-		{
-			next.X += Step();
-		}
-		else
-		{
-			next.X -= Step();
-		}
-
-		if (Task5::Utils::IsSuccess50Percent())
-		{
-			next.Y += Step();
-		}
-		else
-		{
-			next.Y -= Step();
-		}
-		Coords.Add(next);
-	}
+	InitTargetCoords();
 
 	// ToString : FString 반환
 	// UE_LOG에서 Const TCHAR* 를 요구하기에 
@@ -61,11 +40,7 @@ void AMyActor::Move()
 		return;
 	}
 
-	if (Task5::Utils::IsSuccess50Percent())
-	{
-		EventCounts++;
-		UE_LOG(LogCoord, Log, TEXT("이벤트가 발생했습니다!"));
-	}
+	EventCheck();
 
 	Idx++;
 
@@ -75,6 +50,42 @@ void AMyActor::Move()
 	UE_LOG(LogCoord, Log, TEXT("이동 거리 : %f"), distance);
 	FullDistance += distance;
 }
+
+void AMyActor::InitTargetCoords()
+{
+	for (int i = 1; i < 11; i++)
+	{
+		FVector next = Coords[i - 1];
+		if (Task5::Utils::IsSuccess50Percent())
+		{
+			next.X += Step();
+		}
+		else
+		{
+			next.X -= Step();
+		}
+
+		if (Task5::Utils::IsSuccess50Percent())
+		{
+			next.Y += Step();
+		}
+		else
+		{
+			next.Y -= Step();
+		}
+		Coords.Add(next);
+	}
+}
+
+void AMyActor::EventCheck()
+{
+	if (Task5::Utils::IsSuccess50Percent())
+	{
+		EventCounts++;
+		UE_LOG(LogCoord, Log, TEXT("이벤트가 발생했습니다!"));
+	}
+}
+
 
 void AMyActor::Tick(float DeltaTime)
 {

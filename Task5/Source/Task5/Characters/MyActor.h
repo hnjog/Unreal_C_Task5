@@ -19,6 +19,9 @@ protected:
 
 	void Move();
 
+	void InitTargetCoords();
+	void EventCheck();
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 
