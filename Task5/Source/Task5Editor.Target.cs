@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Task5EditorTarget : TargetRules
 {
-	public Task5EditorTarget(TargetInfo Target) : base(Target)
+	public Task5EditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
