@@ -24,6 +24,10 @@ public:
 
 public:
 	// Vector와 비슷한 동적 배열 컨테이너
-	TArray<FVector2D> Coords;
+	TArray<FVector> Coords;
 	int32_t Idx;
+
+	bool IsArrived;
+	int32_t EventCounts;
+	double FullDistance;
 };

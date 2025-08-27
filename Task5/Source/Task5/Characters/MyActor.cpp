@@ -1,12 +1,16 @@
 #include "MyActor.h"
 #include "../LogTests.h"
+#include "../MyUtils.h"
 
 AMyActor::AMyActor()
+	:Idx(0),
+	IsArrived(false),
+	EventCounts(0),
+	FullDistance(0.0)
 {
 	PrimaryActorTick.bCanEverTick = true;
 	Coords.Reserve(11);
-	Coords.Add(FVector2D(0, 0));
-	Idx = 0;
+	Coords.Add(FVector(0, 0,0));
 }
 
 void AMyActor::BeginPlay()
@@ -15,7 +19,7 @@ void AMyActor::BeginPlay()
 	
 	for (int i = 1; i < 11; i++)
 	{
-		FVector2d next = Coords[i - 1];
+		FVector next = Coords[i - 1];
 		next.X += Step();
 		next.Y += Step();
 		Coords.Add(next);
@@ -35,16 +39,33 @@ int32_t AMyActor::Step()
 void AMyActor::Move()
 {
 	if (Idx >= Coords.Num() - 1)
+	{
+		IsArrived = true;
+		UE_LOG(LogCoord, Log, TEXT("총 발생 이벤트 횟수 : % d"), EventCounts);
+		UE_LOG(LogCoord, Log, TEXT("총 이동 거리 : %f"), FullDistance);
 		return;
+	}
+
+	if (Task5::Utils::IsSuccess50Percent())
+	{
+		EventCounts++;
+		UE_LOG(LogCoord, Log, TEXT("이벤트가 발생했습니다!"));
+	}
 
 	Idx++;
+
+	double distance = Task5::Utils::GetDistance(Coords[Idx], Coords[Idx - 1]);
+
 	UE_LOG(LogCoord, Log, TEXT("현재 위치 : %s"), *Coords[Idx].ToString());
+	UE_LOG(LogCoord, Log, TEXT("이동 거리 : %f"), distance);
+	FullDistance += distance;
 }
 
 void AMyActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	Move();
+	if(IsArrived == false)
+		Move();
 }
 
