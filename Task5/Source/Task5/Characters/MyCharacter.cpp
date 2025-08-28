@@ -133,6 +133,12 @@ void AMyCharacter::EventCheck()
 	if (Task5::Utils::IsSuccess50Percent())
 	{
 		EventCounts++;
+		FVector nowLoc = GetActorLocation();
+		nowLoc.Z += 100.0f;
+		if (AController* controller = GetController())
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(controller, FXEvent, nowLoc, FRotator::ZeroRotator, FVector(2.f, 2.f, 2.f), true, true, ENCPoolMethod::None, true);
+		}
 		UE_LOG(LogCoord, Log, TEXT("이벤트가 발생했습니다!"));
 	}
 }

@@ -46,4 +46,7 @@ protected:
 	/** FX Class that we will spawn when clicking */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	class UNiagaraSystem* FXCursor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	class UNiagaraSystem* FXEvent;
 };
