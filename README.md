@@ -7,12 +7,7 @@
 
 - actor가 spawn되는 시점에 동작되도록 코드 구현<br>
 
-<iframe width="560" height="315"
-    src="https://www.youtube.com/embed/9EvzXrjvtQU"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-</iframe><br>
+관련 영상 : https://www.youtube.com/embed/9EvzXrjvtQU <br>
 
 랜덤한 위치로 '이동'<br>
 (이동 예상 지점에 '화살표' 이펙트)<br>
@@ -44,7 +39,7 @@ MyUtils
 - namespace와 ForceInline으로 묶은 기타 유틸리티 함수 묶음 파일
 ```
 
-## 트러블 슈팅 - Utility 파일의 중복 선언?
+## 트러블 슈팅 1 - Utility 파일의 중복 선언?
 <img width="2125" height="278" alt="Image" src="https://github.com/user-attachments/assets/9fc4b302-2145-481a-b62e-37c8f4cd0952" /><br>
 
 이상하게도 MyUtils에서<br>
@@ -118,7 +113,7 @@ inline 속성은 해당 조건에 대한 '특례'로서 중복 선언을 허용�
 - 암묵적으로 클래스 내부의 멤버 함수는 inline 함수 취급하기에 에러를 내뱉지 않음!<br>
  (그래서 Getter/Setter를 헤더에서 구현하더라도 에러가 없다!)<br>
 
- ## 트러블 슈팅 - UAIBlueprintHelperLibrary::SimpleMoveToLocation 가 제대로 동작하지 않는다?
+ ## 트러블 슈팅 2 - UAIBlueprintHelperLibrary::SimpleMoveToLocation 가 제대로 동작하지 않는다?
 
 일단 내 방식은<br>
 Unreal 예제의 TopDownProject 방식의 일부 방식을 카피하여 구현하였다<br>
